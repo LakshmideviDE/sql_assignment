@@ -1,24 +1,20 @@
---3. Write a query to find for each date the number of different products sold and their names.  Column names: (sell_date, product) 
 use ecommerce
-create table product_details(
-	sell_date DATE,
-	product varchar(20)
-	);
--- insert values into the table
-insert into product_details (sell_date, product) values
-('2020-05-30', 'Headphones'),
-('2020-06-01', 'Pencil'), 
-('2020-06-02', 'Mask'),
-('2020-05-30', 'Basketball'),
-('2020-06-01', 'Book'),
-('2020-06-02', ' Mask '),
-('2020-05-30', 'T-Shirt');
---Query to find for each date the number of different products sold and their names
-select
-    sell_date,
-    count(DISTINCT product) AS num_sold,
-    string_agg(product, ', ') AS product_list
-from
-    product_details
-group by
-    sell_date;
+create table dept_tbl(id_deptname varchar(20),emp_name varchar(15),salary int);
+-- insert given records from the table 
+insert into dept_tbl (id_deptname,emp_name,salary) values
+('1111-MATH', 'RAHUL', 10000),
+('1111-MATH', 'RAKESH', 20000),
+('2222-SCIENCE', 'AKASH', 10000),
+('2222-SCIENCE', 'ANDREW', 10000),
+('3333-CHEM', 'ANKIT', 25000),
+('3333-CHEM', 'SONIKA', 12000),
+('4444-BIO', 'HITESH', 2300),
+('4444-BIO', 'AKSHAY', 10000);
+--total salary for each department
+SELECT
+    substring(id_deptname, charindex('-', id_deptname) + 1, LEN(id_deptname)) AS dept_name,
+    sum(salary) AS total_salary
+FROM
+    dept_tbl
+GROUP BY
+    substring(id_deptname, charindex('-', id_deptname) + 1, LEN(id_deptname));
