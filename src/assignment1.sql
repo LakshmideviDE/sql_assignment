@@ -80,7 +80,7 @@ select userid from users where userid like 'M%';
 select distinct userid from users;
 --14.change column name from product table as price_values from price
 EXEC sp_rename  'product.price', 'price_value', 'COLUMN'
---15. Change the Column value product_name – Ipad to Iphone from product table
+--15. Change the Column value product_name â€“ Ipad to Iphone from product table
 update product set product_name='Ipad' where product_name='Iphone';
 --16.Change the table name of gold_member_users to gold_membership_users
 EXEC sp_rename 'gold_member_users', 'gold_membership_users';
