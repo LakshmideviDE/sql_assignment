@@ -14,12 +14,9 @@ insert into email_signup (id,email_id,signup_date) values
 (6, 'Hitesh@Twitter.com', '2015-01-01'),
 (7, 'Rakesh@facebook.com', null);
 -- Query to find gmail accounts with latest and first signup date and difference
-
-SELECT
-    COUNT(CASE WHEN LOWER(email_id) LIKE '%gmail.com' THEN 1 END) AS count_gmail_account,
-    MAX(CASE WHEN LOWER(email_id) LIKE '%gmail.com' THEN signup_date END) AS latest_signup_date,
-    MIN(CASE WHEN LOWER(email_id) LIKE '%gmail.com' THEN signup_date END) AS first_signup_date,
-    DATEDIFF(DAY, MIN(CASE WHEN LOWER(email_id) LIKE '%gmail.com' THEN signup_date END), MAX(CASE WHEN LOWER(email_id)
-	LIKE '%gmail.com' THEN signup_date END)) AS diff_in_days
-FROM
-    email_signup;
+select count(*) AS count_gmail_account,
+MAX(signup_date) AS latest_signup_date,
+MIN(signup_date) AS first_signup_date,
+DATEDIFF(DAY, MIN(signup_date), MAX(signup_date) AS diff_in_days
+FROM email_signup where LOWER(email_id) like '%gmail.com';
+	
