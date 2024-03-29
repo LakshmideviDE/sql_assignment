@@ -39,27 +39,9 @@ GROUP BY
 --7.distint date of each customer visited on website
 select distinct created_date,userid from sales;
 --8 find the first product purchased by each customer using three tables(users,sales,product)
-select userid, created_date AS first_purchase_date, product_name
-FROM (
-    SELECT 
-        u.userid,
-        s.created_date,
-        p.product_name,
-        ROW_NUMBER() OVER (partition by u.userid order by s.created_date) as rn
-    FROM 
-        users u
-    JOIN 
-        sales s ON u.userid = s.userid
-    JOIN 
-        product p ON s.product_id = p.product_id
-) AS subquery
-WHERE rn =1
-update product set  product_name ='mobile' where product_name='phone'
-select*from product
-select * from sales
-select * from gold_member_users
-update sales set product_id=2 where created_date='2016-03-11';
-update sales set product_id=3 where created_date='2016-11-10';
+select u.userid,MIN(s.created_date)As first_purchase_date,p.product_name
+    FROM user u join sales s on u.userid = s.userid
+    join product p on s.product_id = p.product_id GROUP BY u.userid,p.product_name;
 --9 most purchased item of each customer in three count
 select userid,count(product_name) as item_count
 from sales
