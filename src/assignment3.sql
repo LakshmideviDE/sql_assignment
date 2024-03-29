@@ -12,9 +12,9 @@ insert into dept_tbl (id_deptname,emp_name,salary) values
 ('4444-BIO', 'AKSHAY', 10000);
 --total salary for each department
 SELECT
-    substring(id_deptname, charindex('-', id_deptname) + 1, LEN(id_deptname)) AS dept_name,
-    sum(salary) AS total_salary
+    RIGHT(id_deptname, LEN(id_deptname) - CHARINDEX('-', id_deptname)) AS dept_name,
+    SUM(salary) AS total_salary
 FROM
     dept_tbl
 GROUP BY
-    substring(id_deptname, charindex('-', id_deptname) + 1, LEN(id_deptname));
+    RIGHT(id_deptname, LEN(id_deptname) - CHARINDEX('-', id_deptname));
