@@ -1,4 +1,4 @@
-3. Write a query to find for each date the number of different products sold and their names.  Column names: (sell_date, product) 
+2. Write a query to find for each date the number of different products sold and their names.  Column names: (sell_date, product) 
 use ecommerce
 create table product_details(
 	sell_date DATE,
